@@ -47,7 +47,16 @@ This project implements a **semantic dispatcher** that dynamically routes prompt
 ## 🏗️ System Architecture
 
 ```mermaid
-graph TD
+flowchart TD
+  UI["User Interface (PWA + Streamlit)"] --> GW["Gateway API (dispatch)"]
+  GW --> R{Semantic Dispatcher (Runner)}
+
+  R -- "PII/PHI" --> EDGE["EDGE: Local Ollama"]
+  R -- "Patient context (RAG)" --> FOG["FOG: FastAPI + RAG + Ollama"]
+  R -- "Complex query" --> CLOUD["CLOUD: OpenAI (optional)"]
+
+  FOG --> DB[(MySQL)]
+  FOG --> VS[(FAISS Vector Store)]graph TD
   UI[User Interface (PWA / Streamlit)] --> GW[Gateway API /dispatch]
   GW --> R{Semantic Dispatcher (Runner)}
 
@@ -57,7 +66,7 @@ graph TD
 
   FOG --> DB[(MySQL)]
   FOG --> VS[(FAISS Vector Store)]
-
+```
 📦 Prerequisites
 
 Python 3.10+
@@ -73,10 +82,7 @@ pip install -r requirements.txt
 
 🦙 Ollama Setup
 
-Start Ollama:
-
-ollama serve
-
+Start Ollama: ollama serve
 
 Pull a model (example):
 
