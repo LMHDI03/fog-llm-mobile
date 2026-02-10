@@ -48,7 +48,7 @@ This project implements a **semantic dispatcher** that dynamically routes prompt
 
 
 <p align="center">
-  <img src="assets/architecture.png" alt="Fog LLM Mobile Demo" width="320">
+  <img src="assets/architecture.png" alt="Fog LLM Mobile Demo" width="450">
 </p>
 📦 Prerequisites
 
