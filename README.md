@@ -47,18 +47,9 @@ This project implements a **semantic dispatcher** that dynamically routes prompt
 ## 🏗️ System Architecture
 
 
-flowchart TD
-  UI["User Interface (PWA or Streamlit)"] --> GW["Gateway API (dispatch)"]
-  GW --> R{"Semantic Dispatcher"}
-
-  R -- "PII/PHI" --> EDGE["EDGE (Local Ollama)"]
-  R -- "Needs RAG" --> FOG["FOG (FastAPI + RAG + Ollama)"]
-  R -- "Complex" --> CLOUD["CLOUD (OpenAI optional)"]
-
-  FOG --> DB[(MySQL)]
-  FOG --> VS[(FAISS Vector Store)]
-
-
+<p align="center">
+  <img src="assets/architecture.png" alt="Fog LLM Mobile Demo" width="320">
+</p>
 📦 Prerequisites
 
 Python 3.10+
