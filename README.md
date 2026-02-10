@@ -46,18 +46,18 @@ This project implements a **semantic dispatcher** that dynamically routes prompt
 
 ## 🏗️ System Architecture
 
-```mermaid
-graph TD
-  UI[User Interface (PWA / Streamlit)] --> GW[Gateway API /dispatch]
-  GW --> R{Semantic Dispatcher (Runner)}
 
-  R -- "PII/PHI?" --> EDGE[EDGE: Local Ollama]
-  R -- "Patient context?" --> FOG[FOG: FastAPI + RAG + Ollama]
-  R -- "Complex?" --> CLOUD[CLOUD: OpenAI (optional)]
+flowchart TD
+  UI["User Interface (PWA or Streamlit)"] --> GW["Gateway API (dispatch)"]
+  GW --> R{"Semantic Dispatcher"}
+
+  R -- "PII/PHI" --> EDGE["EDGE (Local Ollama)"]
+  R -- "Needs RAG" --> FOG["FOG (FastAPI + RAG + Ollama)"]
+  R -- "Complex" --> CLOUD["CLOUD (OpenAI optional)"]
 
   FOG --> DB[(MySQL)]
   FOG --> VS[(FAISS Vector Store)]
-```
+
 
 📦 Prerequisites
 
@@ -74,10 +74,7 @@ pip install -r requirements.txt
 
 🦙 Ollama Setup
 
-Start Ollama:
-
-ollama serve
-
+Start Ollama: ollama serve
 
 Pull a model (example):
 
@@ -166,27 +163,24 @@ Retry:
 
 Patient ID 2102: summarize diagnosis and treatment.
 
-📂 Project Structure
+📂 Project structure (icons + tree)
 
-core/runner.py — routing logic (PII/PHI + RAG + complexity + fallback)
-
-core/platform.py — calls Edge/Fog/Cloud
-
-core/schema.py — configuration (URLs, models, markers)
-
-core/session.py — conversation history
-
-rag.py — RAG (MySQL → embeddings → FAISS search)
-
-fog_server.py — Fog service (RAG + Ollama)
-
-gateway_api.py — /dispatch entrypoint
-
-pwa_app/ — Mobile PWA (HTML/JS/CSS)
-
-streamlit_app.py — Streamlit demo UI
-
-UI
+📁 FOG_LLM_MOBILE
+├── 🧠 core/
+│ ├── ⚙️ schema.py → configuration (URLs, models, markers)
+│ ├── 🛰️ platform.py → Edge/Fog/Cloud calls
+│ ├── 🧭 runner.py → routing logic (PII/PHI + RAG + complexity + fallback)
+│ └── 🗂️ session.py → conversation history
+├── 🧫 rag.py → RAG (MySQL → embeddings → FAISS search)
+├── ☁️ fog_server.py → Fog service (FastAPI + RAG + Ollama)
+├── 🚪 gateway_api.py → /dispatch entrypoint (API gateway)
+├── 🖥️ streamlit_app.py → Streamlit demo UI
+├── 📱 pwa_app/
+│ ├── 🧩 index.html
+│ ├── 🧠 app.js
+│ ├── 🎨 styles.css
+│ └── 🧾 manifest.json
+└── 📦 requirements.txt
 
 👥 Authors
 
