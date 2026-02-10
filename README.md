@@ -57,7 +57,6 @@ graph TD
 
   FOG --> DB[(MySQL)]
   FOG --> VS[(FAISS Vector Store)]
-```
 
 📦 Prerequisites
 
