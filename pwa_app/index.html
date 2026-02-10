@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fog LLM Mobile (PWA)</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Fog LLM Mobile</h1>
+      <p class="sub">Edge / Fog / Cloud Dispatcher</p>
+    </div>
+    <button id="settingsBtn" class="btn ghost">⚙️</button>
+  </header>
+
+  <main class="container">
+    <section id="chat" class="chat"></section>
+
+    <section class="composer">
+      <textarea id="prompt" placeholder="Tape ton prompt..." rows="2"></textarea>
+      <button id="send" class="btn">Envoyer</button>
+    </section>
+
+    <section id="meta" class="meta"></section>
+  </main>
+
+  <!-- Settings modal -->
+  <div id="modal" class="modal hidden">
+    <div class="card">
+      <h3>Réglages</h3>
+      <label>URL API (Gateway)</label>
+      <input id="apiUrl" type="text" placeholder="http://192.168.1.15:8000" />
+      <div class="row">
+        <button id="save" class="btn">Sauvegarder</button>
+        <button id="close" class="btn ghost">Fermer</button>
+      </div>
+      <p class="hint">
+        • PC navigateur : <code>http://localhost:8000</code><br/>
+        • Android emulator : <code>http://10.0.2.2:8000</code><br/>
+        • iPhone réel : <code>http://IP_DU_PC:8000</code>
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
